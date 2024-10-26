@@ -1,0 +1,7 @@
+image: /home/ubuntu/ws_livox/src/FAST_LIO/PCD/jiao3map3/scans.pgm
+resolution: 0.050000
+origin: [-18.650000, -64.749998, 0]
+negate: 0
+occupied_thresh: 0.65
+free_thresh: 0.196
+

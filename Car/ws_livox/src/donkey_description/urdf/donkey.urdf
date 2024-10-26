@@ -1,0 +1,52 @@
+<robot name="donkey">
+  <material name="orange">
+    <color rgba="1.0 0.5 0.2 1" />
+  </material>
+  <material name="gray">
+    <color rgba="0.2 0.2 0.2 1" />
+  </material>
+
+  <link name="body" />
+  <joint name="body_joint" type="fixed">
+    <child link="livox_frame" />
+    <parent link="body" />
+    <origin rpy="0 0 0" xyz="0 0 0" />
+  </joint>
+
+  <link name="livox_frame">
+    <visual>
+      <origin xyz="0 0 0" />
+      <geometry>
+        <cylinder length="0.05" radius="0.03" />
+      </geometry>
+      <material name="gray" />
+    </visual>
+  </link>
+
+  <link name="base_link">
+  <!--link name="base_footprint"-->
+    <visual>
+    <geometry>
+        <!--cylinder length="0.45" radius="0.45"/-->
+        <box size="0.25 0.15 0.08"/> 
+    </geometry>
+    <origin rpy="0 0 0" xyz="0  0 .04"/>
+    <material name="blue">
+        <color rgba="0 1 .8 0.5"/>
+    </material>
+    </visual>
+ </link>
+
+  <!-- <joint name="imu_link_joint" type="fixed">
+    <parent link="base_link" />
+    <child link="imu_link" />
+    <origin rpy="0 0 -1.570796" xyz="0.05 0 0.065" />
+  </joint> -->
+
+  <joint name="livox_joint" type="fixed">
+    <child link="base_link" />
+    <parent link="livox_frame" />
+    <origin rpy="0 0 -1.570796" xyz="0 -0.10 -0.10" />
+  </joint>
+
+</robot>

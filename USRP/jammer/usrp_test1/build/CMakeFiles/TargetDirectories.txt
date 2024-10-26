@@ -1,0 +1,3 @@
+/home/zynq/Vscode_gnu/usrp_test1/build/CMakeFiles/rebuild_cache.dir
+/home/zynq/Vscode_gnu/usrp_test1/build/CMakeFiles/edit_cache.dir
+/home/zynq/Vscode_gnu/usrp_test1/build/CMakeFiles/my_usrp_app.dir

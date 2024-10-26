@@ -1,0 +1,20 @@
+<launch>
+	<arg name="rviz" default="false" />
+	<arg name="use_sim_time" value="true" />
+	<!-- <arg name="map" default="$(find fast_lio)/PCD/scans.pcd" /> -->
+	<!-- Mid 360 driver -->
+	<include file="$(find livox_ros_driver2)/launch_ROS1/msg_MID360.launch" />
+	<!-- fast_lio -->
+	<include file="$(find fast_lio)/launch/mapping_mid360.launch" />
+
+	<!-- build 2d map -->
+	<include file="$(find fast_lio)/launch/Pointcloud2Map.launch">
+	</include>
+	<!-- pointscloud2 to laserscans -->
+	<include file="$(find fast_lio_localization)/launch/PointsCloud2toLaserscan.launch" />
+	<!-- 加载 URDF 文件到参数服务器 -->
+	<param name="robot_description" command="cat '$(find donkey_description)/urdf/donkey.urdf'" />
+	<node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher" output="screen" />
+	<!-- Chassis -->
+    <include file="$(find chassis)/launch/chassis.launch" />
+</launch>

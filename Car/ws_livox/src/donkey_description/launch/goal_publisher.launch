@@ -1,0 +1,3 @@
+<launch>
+	<node pkg="donkey_description" name="goal_publisher" type="goal_publisher_det_flask.py" output="screen" />
+</launch>

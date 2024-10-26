@@ -1,0 +1,13 @@
+train: train/images
+val: valid/images
+test: test/images
+
+nc: 1
+names: ['xiaoba']
+
+roboflow:
+  workspace: qwe-o2wy7
+  project: chiikawachiikawa-f3v8b
+  version: 1
+  license: CC BY 4.0
+  url: https://universe.roboflow.com/qwe-o2wy7/chiikawachiikawa-f3v8b/dataset/1

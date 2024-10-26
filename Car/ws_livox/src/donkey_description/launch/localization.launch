@@ -1,0 +1,28 @@
+<launch>
+	<arg name="rviz" default="false" />
+	<arg name="use_sim_time" value="false" />
+	<arg name="map" default="$(find fast_lio)/PCD/jiao3map3" /> <!-- xue10dixia jiao3map2 -->
+	<!-- Mid 360 driver -->
+	<include file="$(find livox_ros_driver2)/launch_ROS1/msg_MID360.launch" />
+	<!-- fast_lio -->
+	<include file="$(find fast_lio)/launch/mapping_mid360.launch" />
+	<!-- pointscloud2 to laserscans -->
+	<include file="$(find fast_lio_localization)/launch/PointsCloud2toLaserscan.launch" />
+	<!-- 加载 URDF 文件到参数服务器 -->
+	<param name="robot_description" command="cat '$(find donkey_description)/urdf/donkey.urdf'" />
+	<node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher" output="screen" />
+	<!-- Chassis -->
+	<!-- <include file="$(find chassis)/launch/chassis.launch" /> -->
+
+	<!-- localization specific -->
+
+	<!-- loalization -->
+	<node pkg="fast_lio_localization" type="global_localization.py" name="global_localization" output="screen" />
+	<!-- transform  fusion -->
+	<node pkg="fast_lio_localization" type="transform_fusion.py" name="transform_fusion" output="screen" />
+	<!-- glbal map -->
+	<node pkg="pcl_ros" type="pcd_to_pointcloud" name="map_publishe" output="screen" args="$(arg map)/scans.pcd 5 _frame_id:=map cloud_pcd:=map" />
+	<!-- load 2d map -->
+	<arg name="2dmap" default="scans.yaml" />
+	<node name="map_server" pkg="map_server" type="map_server" args="$(arg map)/scans.yaml /map:=prior_map" />
+</launch>

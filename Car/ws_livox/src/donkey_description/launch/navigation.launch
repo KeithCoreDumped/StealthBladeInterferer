@@ -1,0 +1,20 @@
+<launch>
+    <!-- <include file="$(find donkey_description)/launch/localization.launch" /> -->
+    <!-- hybrid_astar node -->
+    <node pkg="move_base" type="move_base" name="move_base" output="screen"> <!--respawn="false"-->
+        <rosparam file="$(find donkey_nav)/param/costmap_common_params.yaml" command="load" ns="global_costmap" /> 
+        <rosparam file="$(find donkey_nav)/param/costmap_common_params.yaml" command="load" ns="local_costmap" />
+        <rosparam file="$(find donkey_nav)/param/costmap_converter_params.yaml" command="load" />
+        <rosparam file="$(find donkey_nav)/param/local_costmap_params.yaml" command="load" />
+        <rosparam file="$(find donkey_nav)/param/global_costmap_params.yaml" command="load" /> 
+        <rosparam file="$(find donkey_nav)/param/teb_local_planner_params.yaml" command="load" />
+        <rosparam file="$(find donkey_nav)/param/move_base_params.yaml" command="load" />
+        <!-- <rosparam file="$(find hybrid_astar_planner)/test_the_plugin/param/plugins.yaml" command="load" ns="/costmap_node/costmap"/> -->
+        <param name="base_global_planner" value="hybrid_astar_planner/HybridAStarPlanner" /><!--这个标志是选择使用特定的全局规划器-->
+        <!-- <param name="base_global_planner" value="global_planner/GlobalPlanner" /> -->
+        <param name="base_local_planner" value="teb_local_planner/TebLocalPlannerROS" />
+        <param name="use_hybrid_astar" value="true" />
+        <!-- our /map is of PointCloud2, not OccupancyGrid -->
+        <remap from="/map" to="/prior_map"/>
+    </node>
+</launch>

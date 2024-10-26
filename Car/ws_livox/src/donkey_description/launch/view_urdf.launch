@@ -1,0 +1,7 @@
+<launch>
+  <!-- 加载 URDF 文件到参数服务器 -->
+  <param name="robot_description" command="cat '$(find donkey_description)/urdf/donkey.urdf'" />
+
+  <!-- 启动 robot_state_publisher -->
+  <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher" output="screen" />
+</launch>

@@ -1,0 +1,7 @@
+<launch>
+
+    <!-- chassis python -->
+    <node pkg="chassis" type="donkey_chassis_pid_periodic.py" name="chassis" output="screen">
+    </node>
+
+</launch>   
